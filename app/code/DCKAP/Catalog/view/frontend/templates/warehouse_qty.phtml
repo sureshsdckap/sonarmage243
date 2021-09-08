@@ -1,0 +1,44 @@
+<?php
+$product = $block->getCurrentProduct();
+if ($product->getTypeId() == 'simple') {
+    $dckapHelperData = $this->helper('\DCKAP\Catalog\Helper\Data::class');
+    if ($dckapHelperData->getStockDisplay() == 3) {
+        $productWarehouseData = $block->getWarehouseData();
+        if ($productWarehouseData && !empty($productWarehouseData)) {
+            $tot = 0; ?>
+            <div class="custom-warehouse-qty">
+                <div class="block-title">
+                    <a href="#">View Inventory by Location <span><icon class="">^</icon></span></a>
+                </div>
+                <div class="block-content" style="display: none;">
+                    <div style="float: right;padding-top: 5%;">
+                        <button class="action action-close">X</button>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Warehouse</th>
+                            <th>QTY</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($productWarehouseData as $data) {
+                            $tot += (int)$data['available']; ?>
+                            <tr>
+                                <td><?= $data['branchName']; ?></td>
+                                <td><?= $data['available']; ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td>Total</td>
+                            <td><?= $tot; ?></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        <?php }
+    }
+} ?>
