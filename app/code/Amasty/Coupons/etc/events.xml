@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Coupons
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="salesrule_validator_process">
+        <observer name="Amasty_Coupons::CouponObserver" instance="Amasty\Coupons\Observer\CouponObserver" />
+    </event>
+    <event name="sales_quote_collect_totals_before">
+        <observer name="Amasty_Coupons::FlushCouponObserver" instance="Amasty\Coupons\Observer\FlushCouponObserver" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="Amasty_Coupons::updateCouponUsage" instance="Amasty\Coupons\Observer\UpdateCouponUsage" />
+    </event>
+    <event name="sales_order_place_before">
+        <observer name="Amasty_Coupons::updateCouponUsage" instance="Amasty\Coupons\Observer\UpdateCouponUsage" />
+    </event>
+    <event name="order_cancel_after">
+        <observer name="Amasty_Coupons::updateCouponUsage" instance="Amasty\Coupons\Observer\UpdateCouponUsage" />
+    </event>
+</config>

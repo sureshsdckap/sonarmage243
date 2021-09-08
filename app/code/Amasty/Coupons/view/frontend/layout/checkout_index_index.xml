@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Coupons
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="afterMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="discount" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Amasty_Coupons/js/view/checkout/discount</item>
+                                                                    <item name="template" xsi:type="string">Amasty_Coupons/checkout/discount</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="successMessage" xsi:type="string" translate="true">Coupon was successfully applied.</item>
+                                                                        <item name="errorMessage" xsi:type="string" translate="true">Coupon code is not valid.</item>
+                                                                        <item name="cancelMessage" xsi:type="string" translate="true">Coupon code was removed.</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="totals" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="coupon_amount" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Amasty_Coupons/js/view/totals</item>
+                                                            <item name="sortOrder" xsi:type="string">21</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="discountTotalsSelector" xsi:type="string">.totals.discount</item>
+                                                                <item name="amasty_coupon_amount" xsi:type="array"/>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

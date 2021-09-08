@@ -1,0 +1,50 @@
+<form id="discount-coupon-form" data-bind="blockLoader: isLoading">
+    <div class="fieldset amcoupons-main-container">
+        <!-- ko foreach: { data: couponsArray, as: 'code', beforeRemove: onCouponRemove, afterAdd: onCouponAdd } -->
+        <div class="amcoupons-applied-coupon">
+            <!--ko text: code--><!--/ko-->
+            <a href="#"
+               class="amcoupons-remove"
+               data-bind="
+                   click: $parent.removeSelected,
+                   attr: { title: $t('Remove'), 'aria-label': $t('Remove coupon') }
+               "
+               data-amcoupons-js="remove-applied-coupon">
+            </a>
+            <span class="amcoupons-message" data-amcoupons-js="message"></span>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+        <div class="field amcoupons-input">
+            <div class="control">
+                <input class="input-text"
+                       type="text"
+                       id="coupon_code"
+                       name="discount_code"
+                       data-validate="{'required-entry':true}"
+                       data-bind="value: inputCode, attr:{placeholder: $t('Enter Your discount code')}" />
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <button class="amcoupons-apply action primary"
+                    type="submit"
+                    data-bind="
+                        'value': $t('Apply Discount'),
+                        click: apply,
+                        attr: { title: $t('Apply coupon'), 'aria-label': $t('Apply coupon') }
+                    ">
+                <!-- ko i18n: 'Apply Discount'--><!-- /ko -->
+            </button>
+        </div>
+    </div>
+
+    <!-- ko foreach: getRegion('captcha') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</form>
+
+

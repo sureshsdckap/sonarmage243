@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Coupons
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Coupons\Api\Data\RuleInterface" type="Amasty\Coupons\Model\Rule" />
+    <preference for="Amasty\Coupons\Api\RuleRepositoryInterface" type="Amasty\Coupons\Model\Repository\RuleRepository" />
+    <preference for="Amasty\Coupons\Api\Data\CouponApplyResultInterface" type="Amasty\Coupons\Model\Coupon\CouponApplyResult" />
+    <preference for="Amasty\Coupons\Api\ApplyCouponsToCartInterface" type="Amasty\Coupons\Model\Coupon\ApplyCouponsToCart" />
+    <preference for="Amasty\Coupons\Api\ApplyCouponsToGuestCartInterface" type="Amasty\Coupons\Model\Coupon\ApplyCouponsToGuestCart" />
+    <preference for="Amasty\Coupons\Api\GetCouponsByCartIdInterface" type="Amasty\Coupons\Model\Coupon\GetCouponsByCartId" />
+    <preference for="Amasty\Coupons\Api\GuestGetCouponsByCartIdInterface" type="Amasty\Coupons\Model\Coupon\GuestGetCouponsByCartId" />
+    <preference for="Amasty\Coupons\Api\Data\DiscountBreakdownLineInterface" type="Amasty\Coupons\Model\DiscountBreakdownLine" />
+
+    <type name="Magento\Quote\Api\CouponManagementInterface">
+        <plugin name="Amasty_Coupons::CouponManagement" type="Amasty\Coupons\Plugin\CouponManagement" />
+    </type>
+
+    <type name="Magento\SalesRule\Model\ResourceModel\Rule\Collection">
+        <plugin name="Amasty_Coupons::RuleCollection" type="Amasty\Coupons\Plugin\RuleCollection" />
+    </type>
+
+    <type name="Amasty\Coupons\Helper\Data">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+            <argument name="backendSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Coupons\Model\CouponRenderer">
+        <arguments>
+            <argument name="configProvider" xsi:type="object">Amasty\Coupons\Model\Config\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\SalesRule\Api\Data\RuleInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="create_amcoupons" xsi:type="string">Amasty\Coupons\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="update_amcoupons" xsi:type="string">Amasty\Coupons\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="read_amcoupons" xsi:type="string">Amasty\Coupons\Model\SalesRule\ReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\DataProvider">
+        <plugin name="Amasty_Coupons::DataProvider" type="Amasty\Coupons\Plugin\SalesRule\Model\DataProviderPlugin"/>
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule">
+        <plugin name="Amasty_Coupons::SalesRule" type="Amasty\Coupons\Plugin\SalesRule" />
+    </type>
+
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="Amasty_Coupons::DiscountBreakdown" type="Amasty\Coupons\Plugin\Cart\CartTotalRepositoryPlugin" />
+    </type>
+    <type name="Magento\SalesRule\Model\RulesApplier">
+        <plugin name="Amasty_Coupons::setAppliedCouponCodes" type="Amasty\Coupons\Plugin\SalesRule\Model\RulesApplierPlugin"/>
+    </type>
+</config>

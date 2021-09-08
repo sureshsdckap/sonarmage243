@@ -1,0 +1,22 @@
+{
+    "name": "amasty/coupons",
+    "description": "Multiple Coupons by Amasty",
+    "require": {
+        "php": "^7.1.0",
+        "amasty/base": ">=1.11.1",
+        "magento/framework": ">=102.0.1"
+    },
+    "type": "magento2-module",
+    "version": "2.0.1",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Coupons\\": ""
+        }
+    }
+}
