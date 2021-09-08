@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+  * @author     DCKAP <extensions@dckap.com>
+  * @package    DCKAP_OrderApproval
+  * @copyright  Copyright (c) 2020 DCKAP Inc (http://www.dckap.com)
+  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <OrderApproval_section>
+            <general>
+                <enabled>1</enabled>
+                <request_mail_to_admin>ddi_order_approval _email</request_mail_to_admin>
+                <approve_mail_to_customer>ddi_order_approval_email_for_shopper</approve_mail_to_customer>
+                <approve_mail_to_approver>ddi_order_approval_email_for_approver</approve_mail_to_approver>
+            </general>
+        </OrderApproval_section>
+    </default>
+</config>

@@ -1,0 +1,23 @@
+<?php
+$product = $block->getCurrentProduct();
+if ($product->getTypeId() == 'simple') {
+    $guestPriceDisplay = $block->getGuestPriceDisplay();
+    if ($guestPriceDisplay) {
+        $tierPriceData = $block->getTierPriceData();
+        if ($tierPriceData && isset($tierPriceData['priceBreak']['breakLines']) && !empty($tierPriceData['priceBreak']['breakLines'])) { ?>
+            <div class="custom-qty-break">
+                <div class="qty-price-breaks">
+                    <ul>
+                        <?php foreach ($tierPriceData['priceBreak']['breakLines'] as $breakLine) { ?>
+                            <li class="active">
+                                <span><?= $breakLine['breakQty']; ?></span>
+                                -
+                                <span><?= $block->getPriceWithCurrency($breakLine['unitPrice']); ?></span>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        <?php }
+    }
+} ?>

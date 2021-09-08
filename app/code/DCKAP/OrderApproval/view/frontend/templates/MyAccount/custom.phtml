@@ -1,0 +1,18 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Block\Account\AuthorizationLink');
+if ($customerSession->isLoggedIn() == true) {
+    if ($block->getUrl('*/*/', ['_current' => true, '_use_rewrite' => true]) == $block->getUrl('checkout/cart')) {
+        $block->getDisplayAction();
+    }
+    if ($block->getUrl('*/*/', ['_current' => true, '_use_rewrite' => true]) == $block->getUrl('checkout/')) {
+        $block->getDisplayAction();?>
+        <style>
+            .messages div:nth-child(2) {
+                display:none;
+            }
+        </style>
+        <?php
+    }
+}
+?>
